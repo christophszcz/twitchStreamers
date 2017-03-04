@@ -7,6 +7,7 @@ $(document).ready(function(){
 			//console.log(JSON.stringify(data, null, 2));
 
 			$('.online-button').click(function(){
+				$
 				if (data.stream !== null) {
 					$('.online').show();
 					var online =  data.stream.channel.display_name;
@@ -15,13 +16,16 @@ $(document).ready(function(){
 				}
 			});
 
-			// if (data.stream === null ){
-			// 	$('.offline').show();
-			// 	var offlineResult = data._links.self.replace('https://api.twitch.tv/kraken/streams/', '');
-			// 	// console.log(result);
-			// 	$('.offline').append(offlineResult + " ");
-			// 	//offline.push(result);
-			// }
+			$('.offline-button').click(function(){
+				if (data.stream === null ){
+					$('.offline').show();
+					var offlineResult = data._links.self.replace('https://api.twitch.tv/kraken/streams/', '');
+					// console.log(result);
+					$('.offline').append(offlineResult + " ");
+					//offline.push(result);
+				}
+			});
+
 		});
 	}
  
