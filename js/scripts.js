@@ -6,18 +6,22 @@ $(document).ready(function(){
 		$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + users[i], function(data){
 			//console.log(JSON.stringify(data, null, 2));
 
-			if (data.stream === null ){
-				$('.offline').show();
-				var offlineResult = data._links.self.replace('https://api.twitch.tv/kraken/streams/', '');
-				// console.log(result);
-				$('.offline').append(offlineResult + " ");
-				//offline.push(result);
-			} else if (data.stream !== null) {
-				$('.online').show();
-				var online =  data.stream.channel.display_name;
-				// html += "<li>" +  data.stream.channel.display_name + "</li>";
-				$('.online').append(online + " ");
-			}
+			$('.online-button').click(function(){
+				if (data.stream !== null) {
+					$('.online').show();
+					var online =  data.stream.channel.display_name;
+					// html += "<li>" +  data.stream.channel.display_name + "</li>";
+					$('.online').append(online + " ");
+				}
+			});
+
+			// if (data.stream === null ){
+			// 	$('.offline').show();
+			// 	var offlineResult = data._links.self.replace('https://api.twitch.tv/kraken/streams/', '');
+			// 	// console.log(result);
+			// 	$('.offline').append(offlineResult + " ");
+			// 	//offline.push(result);
+			// }
 		});
 	}
  
