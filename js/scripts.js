@@ -7,7 +7,7 @@ $(document).ready(function(){
 			//console.log(JSON.stringify(data, null, 2));
 
 			$('.online-button').click(function(){
-				$
+				$('.offline').hide();
 				if (data.stream !== null) {
 					$('.online').show();
 					var online =  data.stream.channel.display_name;
@@ -17,6 +17,7 @@ $(document).ready(function(){
 			});
 
 			$('.offline-button').click(function(){
+				$('.online').hide();
 				if (data.stream === null ){
 					$('.offline').show();
 					var offlineResult = data._links.self.replace('https://api.twitch.tv/kraken/streams/', '');
