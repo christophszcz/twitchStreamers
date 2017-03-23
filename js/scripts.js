@@ -1,10 +1,29 @@
-$(document).ready(function(){
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://wind-bow.glitch.me/twitch-api/streams/ESL_SC2";
 
-	var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
-	var array = [];
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+      if (xmlhttp.status == 200) {
+        document.getElementById("online-id").innerHTML = xmlhttp.responseText;
+      }else if (xmlhttp.status == 400) {
+        console.log('There was an error 400');
+      }else {
+        console.log('Something else other than 200 was returned.');
+      }
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+}
 
-	for (var i = 0; i < users.length ; i++) {
-		$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + users[i], function(data){
+// $(document).ready(function(){
+
+// 	var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+// 	var array = [];
+
+// 	for (var i = 0; i < users.length ; i++) {
+// 		$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + users[i], function(data){
 			//console.log(JSON.stringify(data, null, 2));
 
 
@@ -36,8 +55,3 @@ $(document).ready(function(){
 			// 		$('.offline').show();
 			// 	}
 			// });
-
-		});
-	}
- 
-});
