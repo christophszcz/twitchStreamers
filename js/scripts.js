@@ -8,12 +8,14 @@ function loadXMLDoc() {
       (function(xmlhttp){
         xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-            if (xmlhttp.status == 200) {
-              document.getElementById('online-id').innerHTML += (xmlhttp.responseText + "<br/><br/>");
-            }else if (xmlhttp.status == 400) {
-              console.log('There was an error 400');
-            }else {  
-              console.log('Something else other than 200 was returned.');
+          if (xmlhttp.status == 200) {
+          	var data = xmlhttp.responseText;
+						var jsonResponse  = JSON.parse(data);
+            document.getElementById('online-id').innerHTML += (jsonResponse['_links']['channel'] + "<br/><br/>");
+          }else if (xmlhttp.status == 400) {
+            console.log('There was an error 400');
+          }else {  
+            console.log('Something else other than 200 was returned.');
           }
         }
       }
