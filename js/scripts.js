@@ -1,25 +1,31 @@
+var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+ 
 function loadXMLDoc() {
-  var xmlhttp = new XMLHttpRequest();
-  var url = "https://wind-bow.glitch.me/twitch-api/streams/ESL_SC2";
-
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-      if (xmlhttp.status == 200) {
-        document.getElementById("online-id").innerHTML = xmlhttp.responseText;
-      }else if (xmlhttp.status == 400) {
-        console.log('There was an error 400');
-      }else {
-        console.log('Something else other than 200 was returned.');
+  for (var i = 0; i < users.length ; i++) { 
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+    
+      (function(xmlhttp){
+        xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            if (xmlhttp.status == 200) {
+              document.getElementById('online-id').innerHTML += (xmlhttp.responseText + "<br/><br/>");
+            }else if (xmlhttp.status == 400) {
+              console.log('There was an error 400');
+            }else {  
+              console.log('Something else other than 200 was returned.');
+          }
+        }
       }
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+      })(xmlhttp)
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send(); 
+  }
 }
-
 var onlineButton = document.getElementById('online-button-id');
-onlineButton.addEventListener('click', loadXMLDoc, false);
-
+onlineButton.addEventListener('click', loadXMLDoc);
+ 
 // $(document).ready(function(){
 
 // 	var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
