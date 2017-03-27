@@ -30,6 +30,7 @@ function loadOnlineXMLDoc() {
 	  }
 	}else{
 		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('title').innerHTML = "<h3>Online</h3>"
 		document.getElementById('online-id').style.display = 'block';
 	}
 }
