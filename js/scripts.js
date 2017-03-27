@@ -42,7 +42,8 @@ function loadOfflineXMLDoc() {
 							var jsonResponse  = JSON.parse(data);
 							document.getElementById('title').innerHTML = "<h3>Offline</h3>"
 							if (jsonResponse['stream'] === null){
-								document.getElementById('online-id').innerHTML += (jsonResponse['stream'] + "<br/><br/>");
+								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+								document.getElementById('online-id').innerHTML += (title + "<br/><br/>");
 							}
 	          }else if (xmlhttp.status == 400) {
 	            console.log('There was an error 400');
