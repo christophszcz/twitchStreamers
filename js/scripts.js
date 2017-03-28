@@ -17,8 +17,11 @@ function loadOnlineXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
-								document.getElementById('title').innerHTML = "<h3>Online</h3>"
-		            document.getElementById('online-id').innerHTML += (jsonResponse['stream']['channel']['display_name'] + "<br/><br/>");
+								document.getElementById('title').innerHTML = "<h3>Online</h3>";
+
+		          	if(jsonResponse['stream']!= null){
+			            document.getElementById('online-id').innerHTML += (jsonResponse['stream']['channel']['display_name'] + "<br/><br/>");
+		          	} 
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
 		          }else {  
