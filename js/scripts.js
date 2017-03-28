@@ -7,6 +7,7 @@ var allCounter = 0;
 function loadOnlineXMLDoc() {
 	if (onlineCounter === 0){
 		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
 		onlineCounter ++;
 	  for (var i = 0; i < users.length ; i++) { 
@@ -38,6 +39,7 @@ function loadOnlineXMLDoc() {
 	  }
 	}else{
 		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('title').innerHTML = "<h3>Online</h3>";
 		document.getElementById('online-id').style.display = 'block';
 	}
@@ -50,6 +52,7 @@ onlineButton.addEventListener('click', loadOnlineXMLDoc);
 function loadOfflineXMLDoc() {
 	if (offlineCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
 		offlineCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
@@ -81,6 +84,7 @@ function loadOfflineXMLDoc() {
 	  }
 	} else {
 		document.getElementById('online-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('title').innerHTML = "<h3>Offline</h3>";
 		document.getElementById('offline-id').style.display = 'block';
 	}
@@ -93,7 +97,7 @@ function loadAllXMLDoc() {
 	if (allCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('all-button-id').style.display = 'block';
+		document.getElementById('all-id').style.display = 'block';
 		allCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
