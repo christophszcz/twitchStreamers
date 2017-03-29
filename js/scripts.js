@@ -111,9 +111,9 @@ function loadAllXMLDoc() {
 								document.getElementById('title').innerHTML = "<h3>All</h3>";
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									document.getElementById('all-id').innerHTML += (title + "<br/><br/>");
+									document.getElementById('all-id').innerHTML += ("<a href='https://www.twitch.tv/" + title + "'>" + title + "</a>" + "<br/><br/>");
 								} else if (jsonResponse['stream'] != null){
-									document.getElementById('all-id').innerHTML += (jsonResponse['stream']['channel']['display_name'] + "<br/><br/>");
+									document.getElementById('all-id').innerHTML += ("<a href='" + jsonResponse['stream']['channel']['url'] + "'>" + jsonResponse['stream']['channel']['display_name'] + "</a>" + "<br/><br/>");
 								}
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
