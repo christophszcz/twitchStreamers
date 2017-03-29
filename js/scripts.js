@@ -43,7 +43,6 @@ function loadOnlineXMLDoc() {
 	}else{
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('title').innerHTML = "<h3>Online</h3>";
 		document.getElementById('online-id').style.display = 'block';
 	}
 }
@@ -68,7 +67,6 @@ function loadOfflineXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
-								document.getElementById('title').innerHTML = "<h3>Offline</h3>";
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 									document.getElementById('offline-id').innerHTML += ("<a href='https://www.twitch.tv/" + title  + "' target='_blank'>" + title + "</a>" + "<br/><br/>");
@@ -88,7 +86,6 @@ function loadOfflineXMLDoc() {
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('title').innerHTML = "<h3>Offline</h3>";
 		document.getElementById('offline-id').style.display = 'block';
 	}
 }
@@ -111,7 +108,6 @@ function loadAllXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
-								document.getElementById('title').innerHTML = "<h3>All</h3>";
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 									document.getElementById('all-id').innerHTML += ("<a href='https://www.twitch.tv/" + title + "' target='_blank'>" + title + "</a>" + "<br/><br/>");
@@ -133,7 +129,6 @@ function loadAllXMLDoc() {
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('title').innerHTML = "<h3>All</h3>";
 		document.getElementById('all-id').style.display = 'block';
 	}
 }
