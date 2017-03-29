@@ -20,10 +20,13 @@ function loadOnlineXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
-								document.getElementById('title').innerHTML = "<h3>Online</h3>";
-
 		          	if(jsonResponse['stream']!= null){
-			            document.getElementById('online-id').innerHTML += ("<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" + jsonResponse['stream']['channel']['display_name'] + "</a>" + "<br/><br/>");
+			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
+																																		    "<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
+																																		      "<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" +
+																																		      jsonResponse['stream']['channel']['display_name'] + 
+																																		    "</a>" +
+																																		  "</div>" );
 		          	} 
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
