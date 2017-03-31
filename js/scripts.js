@@ -11,7 +11,7 @@ var pictures = {
 };
 
 var onlineCounter = 0;
-var offlineCounter = 0;
+var offlineCounter  = 0;
 var allCounter = 0;
 
 //Online Button
@@ -51,8 +51,9 @@ function loadOnlineXMLDoc() {
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
-	  myOnlineElement = document.getElementById('images-id');
-	}else{
+	}
+	myOnlineElement = document.getElementById('images-id');
+	if(onlineCounter >=1 ){
 		document.getElementById('images-id').remove();
 		document.getElementById('row-id').append(myOnlineElement);
 	}
@@ -97,8 +98,9 @@ function loadOfflineXMLDoc() {
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
-	myOfflineElement = document.getElementById('images-id');
-	} else {
+	  var myOfflineElement = document.getElementById('images-id');
+	}
+	if(offlineCounter >=1 ){
 		document.getElementById('images-id').remove();
 		document.getElementById('row-id').append(myOfflineElement);
 		// document.getElementById('images-id').style.display = 'none';
