@@ -17,9 +17,9 @@ var allCounter = 0;
 //Online Button
 function loadOnlineXMLDoc() {
 	if (onlineCounter === 0){
-		document.getElementById('images-id').innerHTML = '';
-		// document.getElementById('all-id').style.display = 'none';
-		// document.getElementById('images-id').style.display = 'block';
+		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'block';
 		onlineCounter ++;
 	  for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
@@ -32,7 +32,7 @@ function loadOnlineXMLDoc() {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
 		          	if(jsonResponse['stream']!= null){
-			            document.getElementById('images-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
+			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
 																																		    "<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
 																																		      "<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" +
 																																		      jsonResponse['stream']['channel']['display_name'] + 
@@ -51,11 +51,10 @@ function loadOnlineXMLDoc() {
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
-	}
-	myOnlineElement = document.getElementById('images-id');
-	if(onlineCounter >=1 ){
-		document.getElementById('images-id').remove();
-		document.getElementById('row-id').append(myOnlineElement);
+	} else {
+		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'block';
 	}
 }
 
@@ -65,7 +64,9 @@ onlineButton.addEventListener('click', loadOnlineXMLDoc);
 //Offline Button
 function loadOfflineXMLDoc() {
 	if (offlineCounter === 0){
-		document.getElementById('images-id').innerHTML = '';
+		document.getElementById('online-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('offline-id').style.display = 'block';
 		offlineCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
@@ -79,7 +80,7 @@ function loadOfflineXMLDoc() {
 								var jsonResponse  = JSON.parse(data);
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									document.getElementById('images-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
+									document.getElementById('offline-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
 																																		    "<a href='https://www.twitch.tv/" +  title + "' target='_blank' class='thumbnail'>" +
 																																		      "<img src='" +  pictures[title]  +"'/>" +
 																																		      title + 
@@ -99,13 +100,10 @@ function loadOfflineXMLDoc() {
 	    xmlhttp.send(); 
 	  }
 	  var myOfflineElement = document.getElementById('images-id');
-	}
-	if(offlineCounter >=1 ){
-		document.getElementById('images-id').remove();
-		document.getElementById('row-id').append(myOfflineElement);
-		// document.getElementById('images-id').style.display = 'none';
-		// document.getElementById('all-id').style.display = 'none';
-		// document.getElementById('offline-id').style.display = 'block';
+	} else {
+		document.getElementById('online-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('offline-id').style.display = 'block';
 	}
 }
 var offlineButton = document.getElementById('offline-button-id');
