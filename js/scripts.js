@@ -162,3 +162,12 @@ function loadAllXMLDoc() {
 
 var allButton = document.getElementById('all-button-id');
 allButton.addEventListener('click', loadAllXMLDoc);
+
+//Activate Button 
+var activateButtonVar = document.getElementById('all-button');
+activateButtonVar.addEventListener('click', activateButton);
+
+function activateButton (){
+	activateButtonVar.className += "active";
+}
+ 
