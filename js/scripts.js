@@ -80,7 +80,7 @@ function loadOfflineXMLDoc() {
 								var jsonResponse  = JSON.parse(data);
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									document.getElementById('offline-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
+									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3'>" + 
 																																		    "<a href='https://www.twitch.tv/" +  title + "' target='_blank' class='thumbnail'>" +
 																																		      "<img src='" +  pictures[title]  +"'/>" +
 																																		      title + 
@@ -112,7 +112,7 @@ offlineButton.addEventListener('click', loadOfflineXMLDoc);
 //All Button 
 function loadAllXMLDoc() {
 	if (allCounter === 0){
-		document.getElementById('images-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 		allCounter ++;
@@ -125,11 +125,21 @@ function loadAllXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
+								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 								if (jsonResponse['stream'] === null){
-									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									document.getElementById('all-id').innerHTML += ("<a href='https://www.twitch.tv/" + title + "' target='_blank'>" + title + "</a>" + "<br/><br/>");
+									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
+																																    "<a href='https://www.twitch.tv/" +  title + "' target='_blank' class='thumbnail'>" +
+																																      "<img src='" +  pictures[title]  +"'/>" +
+																																      title + 
+																																    "</a>" +
+																																  "</div>" );
 								} else if (jsonResponse['stream'] != null){
-									document.getElementById('all-id').innerHTML += ("<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" + jsonResponse['stream']['channel']['display_name'] + "</a>" + "<br/><br/>");
+									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
+																																    "<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
+																																      "<img src='" +  pictures[title]  +"'/>" +
+																																      jsonResponse['stream']['channel']['display_name']  + 
+																																    "</a>" +
+																																  "</div>" );
 								}
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
@@ -144,7 +154,7 @@ function loadAllXMLDoc() {
 	    xmlhttp.send(); 
 	  }
 	} else {
-		document.getElementById('images-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 	}
