@@ -19,7 +19,7 @@ body {
 	text-align: center;
 }
 
-/* Tabs */
+/* Navigation Tabs */
 
 .tab-button{
 	color: #fff;
@@ -36,4 +36,11 @@ body {
 
 .nav-tabs {
     border-bottom: 2px solid #ddd;
+}
+
+/* Thumbnails */
+
+.online-box{
+	background-color: #97BA93;
+	border: none;
 }

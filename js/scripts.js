@@ -34,11 +34,11 @@ function loadOnlineXMLDoc() {
 		          	if(jsonResponse['stream']!= null){
 			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" +
 			            																											"<div class='thumbnail online-box'>" +
-			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
+			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
-																											        						"<p>" + jsonResponse['stream']['channel']['status'] + +  "</p>" +
+																											        						"<p>" + jsonResponse['stream']['channel']['status'] + "</p>" +
 																											        					"</div>" +
 																										        					"</div>" );																							
 		          	} 
