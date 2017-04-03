@@ -168,7 +168,7 @@ var activateAllButtonVar = document.getElementById('all-button');
 var activateOnlineButtonVar = document.getElementById('online-button');
 var activateOfflineButtonVar = document.getElementById('offline-button');
 activateAllButtonVar.addEventListener('click', activateAllButtonFn);
-activateButtonVar.addEventListener('click', activateOnlineButtonFn);
+activateOnlineButtonVar.addEventListener('click', activateOnlineButtonFn);
 
 function activateAllButtonFn (){
 	activateAllButtonVar.className += "active";
