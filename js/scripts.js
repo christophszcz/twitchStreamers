@@ -134,18 +134,24 @@ function loadAllXMLDoc() {
 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 								if (jsonResponse['stream'] === null){
 									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
-																																    "<a href='https://www.twitch.tv/" +  title + "' target='_blank' class='thumbnail'>" +
-																																      "<img src='" +  pictures[title]  +"'/>" +
-																																      title + 
-																																    "</a>" +
+																																		"<div class='thumbnail offline-box'>" +
+																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																	      "<img src='" +  pictures[title]  +"'/>" +
+																																	      title + 
+																																	    "</a>" +
+																																	    "<p class='status'>Offline</p>" +
+																																    "</div>" +
 																																  "</div>" );
 								} else if (jsonResponse['stream'] != null){
-									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
-																																    "<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
-																																      "<img src='" +  pictures[title]  +"'/>" +
-																																      jsonResponse['stream']['channel']['display_name']  + 
-																																    "</a>" +
-																																  "</div>" );
+									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+		            																											"<div class='thumbnail online-box'>" +
+		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
+																																			  	"<img src='" + pictures[title] + "'/>" + 	
+																																			  	jsonResponse['stream']['channel']['display_name'] +
+																																			  "</a>" +
+																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'] + "</p>" +
+																										        					"</div>" +
+																									        					"</div>" );
 								}
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
