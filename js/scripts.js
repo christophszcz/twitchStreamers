@@ -5,7 +5,7 @@ var pictures = {
 	'habathcx': 'https://static-cdn.jtvnw.net/jtv_user_pictures/habathcx-profile_image-d75385dbe4f42a66-300x300.jpeg',
 	'cretetion': 'https://static-cdn.jtvnw.net/jtv_user_pictures/cretetion-profile_image-12bae34d9765f222-300x300.jpeg',
 	'OgamingSC2': 'https://static-cdn.jtvnw.net/jtv_user_pictures/ogamingsc2-profile_image-9021dccf9399929e-300x300.jpeg',
-	'storbeck' : 'http://thegastankstore.com/images/notyetavailablekyle.jpg', 
+	'storbeck' : 'https://www.neafund.org/Content/images/neafund_photo_not_yet_available_300x300_01.jpg', 
 	'RobotCaleb': 'https://static-cdn.jtvnw.net/jtv_user_pictures/robotcaleb-profile_image-9422645f2f0f093c-300x300.png',
 	'noobs2ninjas' : 'https://static-cdn.jtvnw.net/jtv_user_pictures/noobs2ninjas-profile_image-34707f847a73d934-300x300.png'
 };
@@ -32,12 +32,15 @@ function loadOnlineXMLDoc() {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
 		          	if(jsonResponse['stream']!= null){
-			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" + 
-																																		    "<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
-																																		      "<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" +
-																																		      jsonResponse['stream']['channel']['display_name'] + 
-																																		    "</a>" +
-																																		  "</div>" );
+			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" +
+			            																											"<div class='thumbnail online-box'>" +
+			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank' class='thumbnail'>" +
+																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
+																																				  	jsonResponse['stream']['channel']['display_name'] +
+																																				  "</a>" +
+																											        						"<p>" + jsonResponse['stream']['channel']['status'] + +  "</p>" +
+																											        					"</div>" +
+																										        					"</div>" );																							
 		          	} 
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
