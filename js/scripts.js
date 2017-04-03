@@ -169,14 +169,23 @@ var activateOnlineButtonVar = document.getElementById('online-button');
 var activateOfflineButtonVar = document.getElementById('offline-button');
 activateAllButtonVar.addEventListener('click', activateAllButtonFn);
 activateOnlineButtonVar.addEventListener('click', activateOnlineButtonFn);
+activateOfflineButtonVar.addEventListener('click', activateOfflineButtonFn);
 
 function activateAllButtonFn (){
 	activateAllButtonVar.className += "active";
 	activateOnlineButtonVar.classList.remove("active");
+	activateOfflineButtonVar.classList.remove("active");
 }
 
 function activateOnlineButtonFn (){
 	activateOnlineButtonVar.className += "active";
-	activateAllButtonVar .classList.remove("active");
+	activateAllButtonVar.classList.remove("active");
+	activateOfflineButtonVar.classList.remove("active");
+}
+
+function activateOfflineButtonFn (){
+	activateOfflineButtonVar.className += "active";
+	activateAllButtonVar.classList.remove("active");
+	activateOnlineButtonVar.classList.remove("active");
 }
  
