@@ -164,10 +164,19 @@ var allButton = document.getElementById('all-button-id');
 allButton.addEventListener('click', loadAllXMLDoc);
 
 //Activate Button 
-var activateButtonVar = document.getElementById('all-button');
-activateButtonVar.addEventListener('click', activateButton);
+var activateAllButtonVar = document.getElementById('all-button');
+var activateOnlineButtonVar = document.getElementById('online-button');
+var activateOfflineButtonVar = document.getElementById('offline-button');
+activateAllButtonVar.addEventListener('click', activateAllButtonFn);
+activateButtonVar.addEventListener('click', activateOnlineButtonFn);
 
-function activateButton (){
-	activateButtonVar.className += "active";
+function activateAllButtonFn (){
+	activateAllButtonVar.className += "active";
+	activateOnlineButtonVar.classList.remove("active");
+}
+
+function activateOnlineButtonFn (){
+	activateOnlineButtonVar.className += "active";
+	activateAllButtonVar .classList.remove("active");
 }
  
