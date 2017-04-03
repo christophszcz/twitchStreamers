@@ -36,11 +36,20 @@ body {
 
 .nav-tabs {
     border-bottom: 2px solid #ddd;
-}
+}s
 
 /* Thumbnails */
 
 .online-box{
 	background-color: #97BA93;
 	border: none;
+}
+
+.offline-box{
+	background-color: #CA8A89;
+	border: none;
+}
+
+.status{
+	font-weight: bold;
 }

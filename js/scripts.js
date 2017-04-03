@@ -38,7 +38,7 @@ function loadOnlineXMLDoc() {
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
-																											        						"<p>" + jsonResponse['stream']['channel']['status'] + "</p>" +
+																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'] + "</p>" +
 																											        					"</div>" +
 																										        					"</div>" );																							
 		          	} 
@@ -84,10 +84,13 @@ function loadOfflineXMLDoc() {
 								if (jsonResponse['stream'] === null){
 									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3'>" + 
-																																		    "<a href='https://www.twitch.tv/" +  title + "' target='_blank' class='thumbnail'>" +
-																																		      "<img src='" +  pictures[title]  +"'/>" +
-																																		      title + 
-																																		    "</a>" +
+																																				"<div class='thumbnail offline-box'>" +
+																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																			      "<img src='" +  pictures[title]  +"'/>" +
+																																			      title + 
+																																			    "</a>" +
+																																			    "<p class='status'>Offline</p>" +
+																																		  	"</div>" +
 																																		  "</div>" );
 								}
 		          }else if (xmlhttp.status == 400) {
