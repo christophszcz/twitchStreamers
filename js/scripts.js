@@ -169,7 +169,7 @@ function loadAllXMLDoc() {
 																																			  	"<img src='" + pictures[title] + "'/>" + 	
 																																			  	jsonResponse['stream']['channel']['display_name'] +
 																																			  "</a>" +
-																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'] + "</p>" +
+																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." +"</p>" +
 																										        					"</div>" +
 																									        					"</div>" );
 								}
