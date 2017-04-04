@@ -81,8 +81,18 @@ function loadOfflineXMLDoc() {
 		          if (xmlhttp.status == 200) {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
-								if (jsonResponse['stream'] === null){
-									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
+									document.getElementById('offline-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+		            																											"<div class='thumbnail'>" +
+		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+		            																													"<img src='" +  pictures[title]  +"'/>" +
+																																			  	title +
+																																			  "</a>" +
+																										        						"<p class='status'>Inactive Account</p>" +
+																										        					"</div>" +
+																									        					"</div>" );
+								} else if (jsonResponse['stream'] === null){
 									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3'>" + 
 																																				"<div class='thumbnail offline-box'>" +
 																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
