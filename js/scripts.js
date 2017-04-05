@@ -16,7 +16,7 @@ var allCounter = 0;
 var searchCounter = 0;
 
 //On load hide search content
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function searchContent(event) { 
 	document.getElementById('online-id').style.display = 'none';
 	document.getElementById('offline-id').style.display = 'none';
 	document.getElementById('all-id').style.display = 'none';
@@ -284,7 +284,13 @@ function activateOfflineButtonFn (){
 
 //Search 
 function search (){
-
+	var input = document.getElementById('search-field').value.toLowerCase();
+	for (var k = 0; k < users.length ;k++){
+		if (!(users[k].match(input)) ){
+			document.getElementById(users[k]).innerHTML = '';
+		}  
+	}
+	document.getElementById('search-id').style.display = 'block';
 }
 
 var searchTextField = document.getElementById('search-button');
@@ -292,12 +298,5 @@ searchTextField.addEventListener('click', search);
 
 // var newGroup = [];
 // searchCounter ++;
-		// var firstInput = document.getElementById('search-field').value.toLowerCase();
-		// for (var k = 0; k < users.length ;k++){
-		// 	if (users[k].match(firstInput)){
-		// 		newGroup.push(users[k]);
-		// 	}  
-		// }
-		// console.log(input);
-		// console.log(newGroup);
- 
+// console.log(input);
+// console.log(newGroup);
