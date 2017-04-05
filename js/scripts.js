@@ -220,4 +220,14 @@ function activateOfflineButtonFn (){
 	activateAllButtonVar.classList.remove("active");
 	activateOnlineButtonVar.classList.remove("active");
 }
+
+//Search
+
+function search(){
+	var input = document.getElementById('search-field').value;
+	console.log(input);
+}
+
+var searchTextField = document.getElementById('search-button');
+searchTextField.addEventListener('click', search);
  
