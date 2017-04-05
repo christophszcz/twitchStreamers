@@ -224,76 +224,69 @@ function activateOfflineButtonFn (){
 
 //Search
 function search(){
-	if (searchCounter === 0){
-		document.getElementById('online-id').style.display = 'none';
-		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('all-id').style.display = 'block';
-		searchCounter ++;
-		var input = document.getElementById('search-field').value;
-		var newGroup = [];
-		for (var k = 0; k < users.length ;k++){
-			if (users[k].match(input)){
-				newGroup.push(users[k]);
-			}  
-		}
-		for (var i = 0; i < newGroup.length ; i++) { 
-	    var xmlhttp = new XMLHttpRequest();
-	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + newGroup[i];
-	      (function(xmlhttp){
-	        xmlhttp.onreadystatechange = function() {
-		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-		          if (xmlhttp.status == 200) {
-		          	var data = xmlhttp.responseText;
-								var jsonResponse  = JSON.parse(data);
-								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
-		            																											"<div class='thumbnail'>" +
-		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-		            																													"<img src='" +  pictures[title]  +"'/>" +
-																																			  	title +
-																																			  "</a>" +
-																										        						"<p class='status'>Inactive Account</p>" +
-																										        					"</div>" +
-																									        					"</div>" );
-								} else if (jsonResponse['stream'] === null){
-									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
-																																		"<div class='thumbnail offline-box'>" +
-																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-																																	      "<img src='" +  pictures[title]  +"'/>" +
-																																	      title + 
-																																	    "</a>" +
-																																	    "<p class='status'>Offline</p>" +
-																																    "</div>" +
-																																  "</div>" );
-								} else if (jsonResponse['stream'] != null){
-									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
-		            																											"<div class='thumbnail online-box'>" +
-		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-																																			  	"<img src='" + pictures[title] + "'/>" + 	
-																																			  	jsonResponse['stream']['channel']['display_name'] +
-																																			  "</a>" +
-																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." +"</p>" +
-																										        					"</div>" +
-																									        					"</div>" );
-								}
-		          }else if (xmlhttp.status == 400) {
-		            console.log('There was an error 400');
-		          }else {  
-		            console.log('Something else other than 200 was returned.');
-		          }
-		        }
-	      	}
-	      })(xmlhttp)
-
-	    xmlhttp.open("GET", url, true);
-	    xmlhttp.send(); 
-	  }
-	} else {
-		document.getElementById('online-id').style.display = 'none';
-		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('all-id').style.display = 'block';
+	document.getElementById('online-id').style.display = 'none';
+	document.getElementById('offline-id').style.display = 'none';
+	document.getElementById('all-id').style.display = 'block';
+	var input = document.getElementById('search-field').value.toLowerCase();
+	var newGroup = [];
+	for (var k = 0; k < users.length ;k++){
+		if (users[k].match(input)){
+			newGroup.push(users[k]);
+		}  
 	}
+	console.log(input);
+	for (var i = 0; i < newGroup.length ; i++) { 
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + newGroup[i];
+      (function(xmlhttp){
+        xmlhttp.onreadystatechange = function() {
+	        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+	          if (xmlhttp.status == 200) {
+	          	var data = xmlhttp.responseText;
+							var jsonResponse  = JSON.parse(data);
+							var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+							if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
+								document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+	            																											"<div class='thumbnail'>" +
+	            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+	            																													"<img src='" +  pictures[title]  +"'/>" +
+																																		  	title +
+																																		  "</a>" +
+																									        						"<p class='status'>Inactive Account</p>" +
+																									        					"</div>" +
+																								        					"</div>" );
+							} else if (jsonResponse['stream'] === null){
+								document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
+																																	"<div class='thumbnail offline-box'>" +
+																																    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																      "<img src='" +  pictures[title]  +"'/>" +
+																																      title + 
+																																    "</a>" +
+																																    "<p class='status'>Offline</p>" +
+																															    "</div>" +
+																															  "</div>" );
+							} else if (jsonResponse['stream'] != null){
+								document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+	            																											"<div class='thumbnail online-box'>" +
+	            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
+																																		  	"<img src='" + pictures[title] + "'/>" + 	
+																																		  	jsonResponse['stream']['channel']['display_name'] +
+																																		  "</a>" +
+																									        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." +"</p>" +
+																									        					"</div>" +
+																								        					"</div>" );
+							}
+	          }else if (xmlhttp.status == 400) {
+	            console.log('There was an error 400');
+	          }else {  
+	            console.log('Something else other than 200 was returned.');
+	          }
+	        }
+      	}
+      })(xmlhttp)
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send(); 
+  }
 }
 
 var searchTextField = document.getElementById('search-button');
