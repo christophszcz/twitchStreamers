@@ -223,7 +223,6 @@ function activateOfflineButtonFn (){
 }
 
 //Search
-
 function search(){
 	if (searchCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
@@ -231,9 +230,15 @@ function search(){
 		document.getElementById('all-id').style.display = 'block';
 		searchCounter ++;
 		var input = document.getElementById('search-field').value;
-		for (var i = 0; i < users.length ; i++) { 
+		var newGroup = [];
+		for (var k = 0; k < users.length ;k++){
+			if (users[k].match(input)){
+				newGroup.push(users[k]);
+			}  
+		}
+		for (var i = 0; i < newGroup.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
-	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + newGroup[i];
 	      (function(xmlhttp){
 	        xmlhttp.onreadystatechange = function() {
 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -292,5 +297,5 @@ function search(){
 }
 
 var searchTextField = document.getElementById('search-button');
-searchTextField.addEventListener('click', loadAllXMLDoc);
+searchTextField.addEventListener('click', search);
  
