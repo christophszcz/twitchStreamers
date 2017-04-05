@@ -80,6 +80,7 @@ function loadOnlineXMLDoc() {
 	if (onlineCounter === 0){
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
 		onlineCounter ++;
 	  for (var i = 0; i < users.length ; i++) { 
@@ -130,6 +131,7 @@ function loadOfflineXMLDoc() {
 	if (offlineCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
 		offlineCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
@@ -191,6 +193,7 @@ function loadAllXMLDoc() {
 	if (allCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 		allCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
