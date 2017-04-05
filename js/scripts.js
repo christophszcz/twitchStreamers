@@ -290,6 +290,9 @@ function activateOfflineButtonFn (){
 
 //Search 
 function search (){
+	document.getElementById('offline-id').style.display = 'none';
+	document.getElementById('all-id').style.display = 'none';
+	document.getElementById('online-id').style.display = 'none';
 	var input = document.getElementById('search-field').value.toLowerCase();
 	for (var k = 0; k < users.length ;k++){
 		if (!(users[k].match(input)) ){
