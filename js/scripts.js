@@ -226,18 +226,11 @@ function activateOfflineButtonFn (){
 function search(){
 	document.getElementById('online-id').style.display = 'none';
 	document.getElementById('offline-id').style.display = 'none';
-	document.getElementById('all-id').style.display = 'block';
-	var input = document.getElementById('search-field').value.toLowerCase();
-	var newGroup = [];
-	for (var k = 0; k < users.length ;k++){
-		if (users[k].match(input)){
-			newGroup.push(users[k]);
-		}  
-	}
-	console.log(input);
-	for (var i = 0; i < newGroup.length ; i++) { 
+	document.getElementById('all-id').style.display = 'none';
+	document.getElementById('search-id').style.display = 'none';
+	for (var i = 0; i < users.length ; i++) { 
     var xmlhttp = new XMLHttpRequest();
-    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + newGroup[i];
+    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
       (function(xmlhttp){
         xmlhttp.onreadystatechange = function() {
 	        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -246,7 +239,7 @@ function search(){
 							var jsonResponse  = JSON.parse(data);
 							var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 							if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-								document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+								document.getElementById('search-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
 	            																											"<div class='thumbnail'>" +
 	            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 	            																													"<img src='" +  pictures[title]  +"'/>" +
@@ -256,7 +249,7 @@ function search(){
 																									        					"</div>" +
 																								        					"</div>" );
 							} else if (jsonResponse['stream'] === null){
-								document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
+								document.getElementById('search-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
 																																	"<div class='thumbnail offline-box'>" +
 																																    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 																																      "<img src='" +  pictures[title]  +"'/>" +
@@ -266,7 +259,7 @@ function search(){
 																															    "</div>" +
 																															  "</div>" );
 							} else if (jsonResponse['stream'] != null){
-								document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+								document.getElementById('search-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
 	            																											"<div class='thumbnail online-box'>" +
 	            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
 																																		  	"<img src='" + pictures[title] + "'/>" + 	
@@ -291,4 +284,15 @@ function search(){
 
 var searchTextField = document.getElementById('search-button');
 searchTextField.addEventListener('click', search);
+
+// var newGroup = [];
+// searchCounter ++;
+		// var firstInput = document.getElementById('search-field').value.toLowerCase();
+		// for (var k = 0; k < users.length ;k++){
+		// 	if (users[k].match(firstInput)){
+		// 		newGroup.push(users[k]);
+		// 	}  
+		// }
+		// console.log(input);
+		// console.log(newGroup);
  
