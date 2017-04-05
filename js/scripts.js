@@ -119,6 +119,7 @@ function loadOnlineXMLDoc() {
 	} else {
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
 	}
 }
@@ -182,6 +183,7 @@ function loadOfflineXMLDoc() {
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
 	}
 }
@@ -252,6 +254,7 @@ function loadAllXMLDoc() {
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 	}
 }
