@@ -48,7 +48,10 @@ function activateOfflineButtonFn (){
 activateOfflineButtonVar.addEventListener('click', loadAllXMLDoc);
 
 //On load show all channels
-//document.addEventListener("DOMContentLoaded", loadAllXMLDoc());
+document.addEventListener("DOMContentLoaded", function(event){
+	activateAllButtonVar.className = "active";
+	loadAllXMLDoc();
+});
 
 function loadAllXMLDoc(){
 	var myNode = document.getElementById("images-id");
