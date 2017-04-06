@@ -10,20 +10,7 @@ var pictures = {
 	'noobs2ninjas' : 'https://static-cdn.jtvnw.net/jtv_user_pictures/noobs2ninjas-profile_image-34707f847a73d934-300x300.png'
 };
 
-var onlineCounter = 0;
-var offlineCounter  = 0;
-var allCounter = 0;
 var searchCounter = 0;
-
-
-// var allButton = document.getElementById('all-button-id');
-// allButton.addEventListener('click', loadAllXMLDoc);
-
-// var onlineButton = document.getElementById('online-button-id');
-// onlineButton.addEventListener('click', loadAllXMLDoc);
-
-// var offlineButton = document.getElementById('offline-button-id');
-// offlineButton.addEventListener('click', loadAllXMLDoc);
 
 //Activate Button 
 var activateAllButtonVar = document.getElementById('all-button');
@@ -64,404 +51,146 @@ activateOfflineButtonVar.addEventListener('click', loadAllXMLDoc);
 //document.addEventListener("DOMContentLoaded", loadAllXMLDoc());
 
 function loadAllXMLDoc(){
-	var myNode = document.getElementById("all-id");
+	var myNode = document.getElementById("images-id");
 	while (myNode.firstChild) {
 	  myNode.removeChild(myNode.firstChild);
 	}
-	if (activateAllButtonVar.className === "active"){
-		if (allCounter === 0){
-			activateAllButtonVar.className = "active";
-			document.getElementById('all-id').style.display = 'block';
-			// allCounter ++;
-			for (var i = 0; i < users.length ; i++) { 
-		    var xmlhttp = new XMLHttpRequest();
-		    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-		      (function(xmlhttp){
-		        xmlhttp.onreadystatechange = function() {
-			        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-			          if (xmlhttp.status == 200) {
-			          	var data = xmlhttp.responseText;
-									var jsonResponse  = JSON.parse(data);
-									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-										document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
-			            																											"<div class='thumbnail'>" +
-			            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-			            																													"<img src='" +  pictures[title]  +"'/>" +
-																																				  	title +
-																																				  "</a>" +
-																											        						"<p class='status'>Inactive Account</p>" +
-																											        					"</div>" +
-																										        					"</div>" );
-									} else if (jsonResponse['stream'] === null){
-										document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
-																																			"<div class='thumbnail offline-box'>" +
-																																		    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-																																		      "<img src='" +  pictures[title]  +"'/>" +
-																																		      title + 
-																																		    "</a>" +
-																																		    "<p class='status'>Offline</p>" +
-																																	    "</div>" +
-																																	  "</div>" );
-									} else if (jsonResponse['stream'] != null){
-										document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
+	if (activateAllButtonVar.className === "active"){ // All channels
+		activateAllButtonVar.className = "active";
+		document.getElementById('images-id').style.display = 'block';
+		for (var i = 0; i < users.length ; i++) { 
+	    var xmlhttp = new XMLHttpRequest();
+	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+	      (function(xmlhttp){
+	        xmlhttp.onreadystatechange = function() {
+		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+		          if (xmlhttp.status == 200) {
+		          	var data = xmlhttp.responseText;
+								var jsonResponse  = JSON.parse(data);
+								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
+									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
+		            																											"<div class='thumbnail'>" +
+		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+		            																													"<img src='" +  pictures[title]  +"'/>" +
+																																			  	title +
+																																			  "</a>" +
+																										        						"<p class='status'>Inactive Account</p>" +
+																										        					"</div>" +
+																									        					"</div>" );
+								} else if (jsonResponse['stream'] === null){
+									document.getElementById('images-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
+																																		"<div class='thumbnail offline-box'>" +
+																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																	      "<img src='" +  pictures[title]  +"'/>" +
+																																	      title + 
+																																	    "</a>" +
+																																	    "<p class='status'>Offline</p>" +
+																																    "</div>" +
+																																  "</div>" );
+								} else if (jsonResponse['stream'] != null){
+									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
+		            																											"<div class='thumbnail online-box'>" +
+		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
+																																			  	"<img src='" + pictures[title] + "'/>" + 	
+																																			  	jsonResponse['stream']['channel']['display_name'] +
+																																			  "</a>" +
+																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
+																										        					"</div>" +
+																									        					"</div>" );
+								}
+		          }else if (xmlhttp.status == 400) {
+		            console.log('There was an error 400');
+		          }else {  
+		            console.log('Something else other than 200 was returned.');
+		          }
+		        }
+	      	}
+	      })(xmlhttp)
+	    xmlhttp.open("GET", url, true);
+	    xmlhttp.send(); 
+	  }
+	} else if (activateOnlineButtonVar.className === "active"){ // Online channels
+		document.getElementById('images-id').style.display = 'block';  
+	  for (var i = 0; i < users.length ; i++) { 
+	    var xmlhttp = new XMLHttpRequest();
+	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+	    
+	      (function(xmlhttp){
+	        xmlhttp.onreadystatechange = function() {
+		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+		          if (xmlhttp.status == 200) {
+		          	var data = xmlhttp.responseText;
+								var jsonResponse  = JSON.parse(data);
+		          	if(jsonResponse['stream']!= null){
+			            document.getElementById('images-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
 			            																											"<div class='thumbnail online-box'>" +
 			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-																																				  	"<img src='" + pictures[title] + "'/>" + 	
+																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
-																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
+																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." + "</p>" +
 																											        					"</div>" +
-																										        					"</div>" );
-									}
-			          }else if (xmlhttp.status == 400) {
-			            console.log('There was an error 400');
-			          }else {  
-			            console.log('Something else other than 200 was returned.');
-			          }
-			        }
-		      	}
-		      })(xmlhttp)
-		    xmlhttp.open("GET", url, true);
-		    xmlhttp.send(); 
-		  }
-		}
-	} else if (activateOnlineButtonVar.className === "active"){
-		if (onlineCounter === 0){
-			document.getElementById('all-id').style.display = 'block';
-			// onlineCounter ++;
-		  for (var i = 0; i < users.length ; i++) { 
-		    var xmlhttp = new XMLHttpRequest();
-		    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-		    
-		      (function(xmlhttp){
-		        xmlhttp.onreadystatechange = function() {
-			        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-			          if (xmlhttp.status == 200) {
-			          	var data = xmlhttp.responseText;
-									var jsonResponse  = JSON.parse(data);
-			          	if(jsonResponse['stream']!= null){
-				            document.getElementById('all-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
-				            																											"<div class='thumbnail online-box'>" +
-				            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-																																					  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
-																																					  	jsonResponse['stream']['channel']['display_name'] +
-																																					  "</a>" +
-																												        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." + "</p>" +
-																												        					"</div>" +
-																											        					"</div>" );																							
-			          	} 
-			          }else if (xmlhttp.status == 400) {
-			            console.log('There was an error 400');
-			          }else {  
-			            console.log('Something else other than 200 was returned.');
-			          }
-			        }
-		      	}
-		      })(xmlhttp)
-		    xmlhttp.open("GET", url, true);
-		    xmlhttp.send(); 
-		  }
-		}
-	} else if (activateOfflineButtonVar.className === "active"){
-		if (offlineCounter === 0){
-			document.getElementById('all-id').style.display = 'block';
-			// offlineCounter ++;
-			for (var i = 0; i < users.length ; i++) { 
-		    var xmlhttp = new XMLHttpRequest();
-		    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-		      (function(xmlhttp){
-		        xmlhttp.onreadystatechange = function() {
-			        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-			          if (xmlhttp.status == 200) {
-			          	var data = xmlhttp.responseText;
-									var jsonResponse  = JSON.parse(data);
-									var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-									if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
-										document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
-			            																											"<div class='thumbnail'>" +
-			            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-			            																													"<img src='" +  pictures[title]  +"'/>" +
-																																				  	title +
-																																				  "</a>" +
-																											        						"<p class='status'>Inactive Account</p>" +
-																											        					"</div>" +
-																										        					"</div>" );
-									} else if (jsonResponse['stream'] === null){
-										document.getElementById('all-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
-																																					"<div class='thumbnail offline-box'>" +
-																																				    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-																																				      "<img src='" +  pictures[title]  +"'/>" +
-																																				      title + 
-																																				    "</a>" +
-																																				    "<p class='status'>Offline</p>" +
-																																			  	"</div>" +
-																																			  "</div>" );
-									}
-			          }else if (xmlhttp.status == 400) {
-			            console.log('There was an error 400');
-			          }else {  
-			            console.log('Something else other than 200 was returned.');
-			          }
-			        }
-		      	}
-		      })(xmlhttp)
-
-		    xmlhttp.open("GET", url, true);
-		    xmlhttp.send(); 
-		  }
-		  var myOfflineElement = document.getElementById('images-id');
-		}
+																										        					"</div>" );																							
+		          	} 
+		          }else if (xmlhttp.status == 400) {
+		            console.log('There was an error 400');
+		          }else {  
+		            console.log('Something else other than 200 was returned.');
+		          }
+		        }
+	      	}
+	      })(xmlhttp)
+	    xmlhttp.open("GET", url, true);
+	    xmlhttp.send(); 
+	  }
+	} else if (activateOfflineButtonVar.className === "active"){ // Offline channels
+		document.getElementById('images-id').style.display = 'block';
+		for (var i = 0; i < users.length ; i++) { 
+	    var xmlhttp = new XMLHttpRequest();
+	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+	      (function(xmlhttp){
+	        xmlhttp.onreadystatechange = function() {
+		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+		          if (xmlhttp.status == 200) {
+		          	var data = xmlhttp.responseText;
+								var jsonResponse  = JSON.parse(data);
+								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
+								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
+									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
+		            																											"<div class='thumbnail'>" +
+		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+		            																													"<img src='" +  pictures[title]  +"'/>" +
+																																			  	title +
+																																			  "</a>" +
+																										        						"<p class='status'>Inactive Account</p>" +
+																										        					"</div>" +
+																									        					"</div>" );
+								} else if (jsonResponse['stream'] === null){
+									document.getElementById('images-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
+																																				"<div class='thumbnail offline-box'>" +
+																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																			      "<img src='" +  pictures[title]  +"'/>" +
+																																			      title + 
+																																			    "</a>" +
+																																			    "<p class='status'>Offline</p>" +
+																																		  	"</div>" +
+																																		  "</div>" );
+								}
+		          }else if (xmlhttp.status == 400) {
+		            console.log('There was an error 400');
+		          }else {  
+		            console.log('Something else other than 200 was returned.');
+		          }
+		        }
+	      	}
+	      })(xmlhttp)
+	    xmlhttp.open("GET", url, true);
+	    xmlhttp.send(); 
+	  }
+	  var myOfflineElement = document.getElementById('images-id');
 	}
 };
-
-// var allButton = document.getElementById('all-button-id');
-// allButton.addEventListener('click', loadAllXMLDoc);
-
-
-//All Button
-// function loadAllXMLDoc(){
-// 	if (allCounter === 0){
-// 		activateAllButtonVar.className = "active";
-// 		document.getElementById('online-id').style.display = 'none';
-// 		document.getElementById('offline-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'block';
-// 		allCounter ++;
-// 		for (var i = 0; i < users.length ; i++) { 
-// 	    var xmlhttp = new XMLHttpRequest();
-// 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-// 	      (function(xmlhttp){
-// 	        xmlhttp.onreadystatechange = function() {
-// 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-// 		          if (xmlhttp.status == 200) {
-// 		          	var data = xmlhttp.responseText;
-// 								var jsonResponse  = JSON.parse(data);
-// 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-// 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-// 									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
-// 		            																											"<div class='thumbnail'>" +
-// 		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 		            																													"<img src='" +  pictures[title]  +"'/>" +
-// 																																			  	title +
-// 																																			  "</a>" +
-// 																										        						"<p class='status'>Inactive Account</p>" +
-// 																										        					"</div>" +
-// 																									        					"</div>" );
-// 								} else if (jsonResponse['stream'] === null){
-// 									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
-// 																																		"<div class='thumbnail offline-box'>" +
-// 																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 																																	      "<img src='" +  pictures[title]  +"'/>" +
-// 																																	      title + 
-// 																																	    "</a>" +
-// 																																	    "<p class='status'>Offline</p>" +
-// 																																    "</div>" +
-// 																																  "</div>" );
-// 								} else if (jsonResponse['stream'] != null){
-// 									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
-// 		            																											"<div class='thumbnail online-box'>" +
-// 		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-// 																																			  	"<img src='" + pictures[title] + "'/>" + 	
-// 																																			  	jsonResponse['stream']['channel']['display_name'] +
-// 																																			  "</a>" +
-// 																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
-// 																										        					"</div>" +
-// 																									        					"</div>" );
-// 								}
-// 		          }else if (xmlhttp.status == 400) {
-// 		            console.log('There was an error 400');
-// 		          }else {  
-// 		            console.log('Something else other than 200 was returned.');
-// 		          }
-// 		        }
-// 	      	}
-// 	      })(xmlhttp)
-
-// 	    xmlhttp.open("GET", url, true);
-// 	    xmlhttp.send(); 
-// 	  }
-// 	} else {
-// 		showContent();
-// 		document.getElementById('online-id').style.display = 'none';
-// 		document.getElementById('offline-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'block';
-// 	}
-// };
-
-// var allButton = document.getElementById('all-button-id');
-// allButton.addEventListener('click', loadAllXMLDoc);
-
-// document.addEventListener("DOMContentLoaded", function(event){ 
-// 	document.getElementById('search-id').innerHTML = ''; 
-// 	document.getElementById('online-id').style.display = 'none';
-// 	document.getElementById('offline-id').style.display = 'none';
-// 	document.getElementById('all-id').style.display = 'none';
-// 	document.getElementById('search-id').style.display = 'none';
-// 	for (var i = 0; i < users.length ; i++) { 
-//     var xmlhttp = new XMLHttpRequest();
-//     var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-//       (function(xmlhttp){
-//         xmlhttp.onreadystatechange = function() {
-// 	        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-// 	          if (xmlhttp.status == 200) {
-// 	          	var data = xmlhttp.responseText;
-// 							var jsonResponse  = JSON.parse(data);
-// 							var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-// 							if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-// 								document.getElementById('search-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
-// 	            																											"<div class='thumbnail'>" +
-// 	            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 	            																													"<img src='" +  pictures[title]  +"'/>" +
-// 																																		  	title +
-// 																																		  "</a>" +
-// 																									        						"<p class='status'>Inactive Account</p>" +
-// 																									        					"</div>" +
-// 																								        					"</div>" );
-// 							} else if (jsonResponse['stream'] === null){
-// 								document.getElementById('search-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
-// 																																	"<div class='thumbnail offline-box'>" +
-// 																																    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 																																      "<img src='" +  pictures[title]  +"'/>" +
-// 																																      title + 
-// 																																    "</a>" +
-// 																																    "<p class='status'>Offline</p>" +
-// 																															    "</div>" +
-// 																															  "</div>" );
-// 							} else if (jsonResponse['stream'] != null){
-// 								document.getElementById('search-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
-// 	            																											"<div class='thumbnail online-box'>" +
-// 	            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-// 																																		  	"<img src='" + pictures[title] + "'/>" + 	
-// 																																		  	jsonResponse['stream']['channel']['display_name'] +
-// 																																		  "</a>" +
-// 																									        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
-// 																									        					"</div>" +
-// 																								        					"</div>" );
-// 							}
-// 	          }else if (xmlhttp.status == 400) {
-// 	            console.log('There was an error 400');
-// 	          }else {  
-// 	            console.log('Something else other than 200 was returned.');
-// 	          }
-// 	        }
-//       	}
-//       })(xmlhttp)
-//     xmlhttp.open("GET", url, true);
-//     xmlhttp.send(); 
-//   }
-// });
-
-//Online Button
-// function loadOnlineXMLDoc() {
-// 	if (onlineCounter === 0){
-// 		document.getElementById('offline-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'none';
-// 		document.getElementById('online-id').style.display = 'block';
-// 		onlineCounter ++;
-// 	  for (var i = 0; i < users.length ; i++) { 
-// 	    var xmlhttp = new XMLHttpRequest();
-// 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-	    
-// 	      (function(xmlhttp){
-// 	        xmlhttp.onreadystatechange = function() {
-// 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-// 		          if (xmlhttp.status == 200) {
-// 		          	var data = xmlhttp.responseText;
-// 								var jsonResponse  = JSON.parse(data);
-// 		          	if(jsonResponse['stream']!= null){
-// 			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
-// 			            																											"<div class='thumbnail online-box'>" +
-// 			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
-// 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
-// 																																				  	jsonResponse['stream']['channel']['display_name'] +
-// 																																				  "</a>" +
-// 																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." + "</p>" +
-// 																											        					"</div>" +
-// 																										        					"</div>" );																							
-// 		          	} 
-// 		          }else if (xmlhttp.status == 400) {
-// 		            console.log('There was an error 400');
-// 		          }else {  
-// 		            console.log('Something else other than 200 was returned.');
-// 		          }
-// 		        }
-// 	      	}
-// 	      })(xmlhttp)
-
-// 	    xmlhttp.open("GET", url, true);
-// 	    xmlhttp.send(); 
-// 	  }
-// 	} else {
-// 		showContent();
-// 		document.getElementById('offline-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'none';
-// 		document.getElementById('online-id').style.display = 'block';
-// 	}
-// }
-
-// var onlineButton = document.getElementById('online-button-id');
-// onlineButton.addEventListener('click', loadAllXMLDoc);
-
-//Offline Button
-// function loadOfflineXMLDoc() {
-// 	if (offlineCounter === 0){
-// 		document.getElementById('online-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'none';
-// 		document.getElementById('offline-id').style.display = 'block';
-// 		offlineCounter ++;
-// 		for (var i = 0; i < users.length ; i++) { 
-// 	    var xmlhttp = new XMLHttpRequest();
-// 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-// 	      (function(xmlhttp){
-// 	        xmlhttp.onreadystatechange = function() {
-// 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-// 		          if (xmlhttp.status == 200) {
-// 		          	var data = xmlhttp.responseText;
-// 								var jsonResponse  = JSON.parse(data);
-// 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
-// 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
-// 									document.getElementById('offline-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
-// 		            																											"<div class='thumbnail'>" +
-// 		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 		            																													"<img src='" +  pictures[title]  +"'/>" +
-// 																																			  	title +
-// 																																			  "</a>" +
-// 																										        						"<p class='status'>Inactive Account</p>" +
-// 																										        					"</div>" +
-// 																									        					"</div>" );
-// 								} else if (jsonResponse['stream'] === null){
-// 									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
-// 																																				"<div class='thumbnail offline-box'>" +
-// 																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
-// 																																			      "<img src='" +  pictures[title]  +"'/>" +
-// 																																			      title + 
-// 																																			    "</a>" +
-// 																																			    "<p class='status'>Offline</p>" +
-// 																																		  	"</div>" +
-// 																																		  "</div>" );
-// 								}
-// 		          }else if (xmlhttp.status == 400) {
-// 		            console.log('There was an error 400');
-// 		          }else {  
-// 		            console.log('Something else other than 200 was returned.');
-// 		          }
-// 		        }
-// 	      	}
-// 	      })(xmlhttp)
-
-// 	    xmlhttp.open("GET", url, true);
-// 	    xmlhttp.send(); 
-// 	  }
-// 	  var myOfflineElement = document.getElementById('images-id');
-// 	} else {
-// 		showContent();
-// 		document.getElementById('online-id').style.display = 'none';
-// 		document.getElementById('all-id').style.display = 'none';
-// 		document.getElementById('offline-id').style.display = 'block';
-// 	}
-// }
-// var offlineButton = document.getElementById('offline-button-id');
-// offlineButton.addEventListener('click', loadAllXMLDoc);
 
 //Search 
 // function search (){
