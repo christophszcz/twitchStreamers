@@ -45,11 +45,10 @@ function activateOfflineButtonFn (){
 document.addEventListener("DOMContentLoaded", loadAllXMLDoc());
 
 function loadAllXMLDoc(){
-	activateAllButtonVar.className += "active";
 	if (allCounter === 0){
+		activateAllButtonVar.className = "active";
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 		allCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
@@ -108,7 +107,6 @@ function loadAllXMLDoc(){
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
 	}
 };
@@ -181,7 +179,6 @@ function loadOnlineXMLDoc() {
 	if (onlineCounter === 0){
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
 		onlineCounter ++;
 	  for (var i = 0; i < users.length ; i++) { 
@@ -220,7 +217,6 @@ function loadOnlineXMLDoc() {
 	} else {
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
 	}
 }
@@ -233,7 +229,6 @@ function loadOfflineXMLDoc() {
 	if (offlineCounter === 0){
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
 		offlineCounter ++;
 		for (var i = 0; i < users.length ; i++) { 
@@ -284,7 +279,6 @@ function loadOfflineXMLDoc() {
 	} else {
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
 	}
 }
