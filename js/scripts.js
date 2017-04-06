@@ -16,7 +16,8 @@ var allCounter = 0;
 var searchCounter = 0;
 
 //On load hide search content
-document.addEventListener("DOMContentLoaded", function searchContent(event) { 
+document.addEventListener("DOMContentLoaded", function(event){ 
+	document.getElementById('search-id').innerHTML = ''; 
 	document.getElementById('online-id').style.display = 'none';
 	document.getElementById('offline-id').style.display = 'none';
 	document.getElementById('all-id').style.display = 'none';
@@ -290,16 +291,42 @@ function activateOfflineButtonFn (){
 
 //Search 
 function search (){
-	document.getElementById('offline-id').style.display = 'none';
-	document.getElementById('all-id').style.display = 'none';
-	document.getElementById('online-id').style.display = 'none';
-	var input = document.getElementById('search-field').value.toLowerCase();
-	for (var k = 0; k < users.length ;k++){
-		if (!(users[k].match(input)) ){
-			document.getElementById(users[k]).innerHTML = '';
-		}  
+	if (searchCounter === 0){
+		searchCounter ++;
+		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'none';
+		document.getElementById('search-id').style.display = 'block';
+		var input = document.getElementById('search-field').value.toLowerCase();
+		for (var k = 0; k < users.length ;k++){
+			if (!(users[k].toLowerCase().match(input)) ){
+				document.getElementById(users[k]).style.display = 'none';
+			}  
+		}
+	} 
+	else {
+		//showContent();
+		showContent();
+		document.getElementById('offline-id').style.display = 'none';
+		document.getElementById('all-id').style.display = 'none';
+		document.getElementById('online-id').style.display = 'none';
+		var nextInput = document.getElementById('search-field').value.toLowerCase();
+		console.log(nextInput);
+		for (var l = 0; l < users.length ;l++){
+			if (!(users[l].toLowerCase().match(nextInput)) ){
+				document.getElementById(users[l]).style.display = 'none';
+			}  
+		}
+		document.getElementById('search-id').style.display = 'block';
 	}
-	document.getElementById('search-id').style.display = 'block';
+}
+
+function showContent(){
+	for (var m = 0; m < users.length; m++){
+		if (document.getElementById(users[m]).style.display ==='none'){
+			document.getElementById(users[m]).style.display = 'block';
+		}
+	}
 }
 
 var searchTextField = document.getElementById('search-button');
@@ -308,4 +335,4 @@ searchTextField.addEventListener('click', search);
 // var newGroup = [];
 // searchCounter ++;
 // console.log(input);
-// console.log(newGroup);
+// console.log(nextInput);
