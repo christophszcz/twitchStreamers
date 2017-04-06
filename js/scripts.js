@@ -24,19 +24,25 @@ activateOnlineButtonVar.addEventListener('click', activateOnlineButtonFn);
 activateOfflineButtonVar.addEventListener('click', activateOfflineButtonFn);
 
 function activateAllButtonFn (){
-	activateAllButtonVar.className += "active";
+	if (activateAllButtonVar.className != "active"){
+		activateAllButtonVar.className += "active";
+	}
 	activateOnlineButtonVar.classList.remove("active");
 	activateOfflineButtonVar.classList.remove("active");
 }
 
 function activateOnlineButtonFn (){
-	activateOnlineButtonVar.className += "active";
+	if (activateOnlineButtonVar.className != "active"){
+		activateOnlineButtonVar.className += "active";
+	}
 	activateAllButtonVar.classList.remove("active");
 	activateOfflineButtonVar.classList.remove("active");
 }
 
 function activateOfflineButtonFn (){
-	activateOfflineButtonVar.className += "active";
+	if (activateOfflineButtonVar.className != "active"){
+		activateOfflineButtonVar.className += "active";
+	}
 	activateAllButtonVar.classList.remove("active");
 	activateOnlineButtonVar.classList.remove("active");
 }
@@ -62,7 +68,7 @@ function loadAllXMLDoc(){
 								var jsonResponse  = JSON.parse(data);
 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
-									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
 		            																											"<div class='thumbnail'>" +
 		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 		            																													"<img src='" +  pictures[title]  +"'/>" +
@@ -72,7 +78,7 @@ function loadAllXMLDoc(){
 																										        					"</div>" +
 																									        					"</div>" );
 								} else if (jsonResponse['stream'] === null){
-									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3'>" + 
+									document.getElementById('all-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
 																																		"<div class='thumbnail offline-box'>" +
 																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 																																	      "<img src='" +  pictures[title]  +"'/>" +
@@ -82,7 +88,7 @@ function loadAllXMLDoc(){
 																																    "</div>" +
 																																  "</div>" );
 								} else if (jsonResponse['stream'] != null){
-									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+									document.getElementById('all-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
 		            																											"<div class='thumbnail online-box'>" +
 		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
 																																			  	"<img src='" + pictures[title] + "'/>" + 	
@@ -105,6 +111,7 @@ function loadAllXMLDoc(){
 	    xmlhttp.send(); 
 	  }
 	} else {
+		showContent();
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'block';
@@ -192,7 +199,7 @@ function loadOnlineXMLDoc() {
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
 		          	if(jsonResponse['stream']!= null){
-			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3'>" +
+			            document.getElementById('online-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
 			            																											"<div class='thumbnail online-box'>" +
 			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
@@ -215,6 +222,7 @@ function loadOnlineXMLDoc() {
 	    xmlhttp.send(); 
 	  }
 	} else {
+		showContent();
 		document.getElementById('offline-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'block';
@@ -234,7 +242,6 @@ function loadOfflineXMLDoc() {
 		for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-	    
 	      (function(xmlhttp){
 	        xmlhttp.onreadystatechange = function() {
 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -243,7 +250,7 @@ function loadOfflineXMLDoc() {
 								var jsonResponse  = JSON.parse(data);
 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
-									document.getElementById('offline-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3'>" +
+									document.getElementById('offline-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
 		            																											"<div class='thumbnail'>" +
 		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 		            																													"<img src='" +  pictures[title]  +"'/>" +
@@ -253,7 +260,7 @@ function loadOfflineXMLDoc() {
 																										        					"</div>" +
 																									        					"</div>" );
 								} else if (jsonResponse['stream'] === null){
-									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3'>" + 
+									document.getElementById('offline-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
 																																				"<div class='thumbnail offline-box'>" +
 																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
 																																			      "<img src='" +  pictures[title]  +"'/>" +
@@ -277,6 +284,7 @@ function loadOfflineXMLDoc() {
 	  }
 	  var myOfflineElement = document.getElementById('images-id');
 	} else {
+		showContent();
 		document.getElementById('online-id').style.display = 'none';
 		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('offline-id').style.display = 'block';
@@ -288,11 +296,20 @@ offlineButton.addEventListener('click', loadOfflineXMLDoc);
 //Search 
 function search (){
 	if (searchCounter === 0){
+		// if (activateAllButtonVar.className === "active"){
+		// 	document.getElementById('offline-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'none';
+		// 	document.getElementById('all-id').style.display = 'block';
+		// } else if (activateOnlineButtonVar.className === "active"){
+		// 	document.getElementById('offline-id').style.display = 'none';
+		// 	document.getElementById('all-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'block';
+		// } else if (activateOfflineButtonVar.className === "active"){
+		// 	document.getElementById('all-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'none';
+		// 	document.getElementById('offline-id').style.display = 'block';
+		// }
 		searchCounter ++;
-		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('online-id').style.display = 'none';
-		document.getElementById('search-id').style.display = 'block';
 		var input = document.getElementById('search-field').value.toLowerCase();
 		for (var k = 0; k < users.length ;k++){
 			if (!(users[k].toLowerCase().match(input)) ){
@@ -301,18 +318,27 @@ function search (){
 		}
 	} 
 	else {
-		//showContent();
+		// if (activateAllButtonVar.className === "active"){
+		// 	document.getElementById('offline-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'none';
+		// 	document.getElementById('all-id').style.display = 'block';
+		// } else if (activateOnlineButtonVar.className === "active"){
+		// 	document.getElementById('offline-id').style.display = 'none';
+		// 	document.getElementById('all-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'block';
+		// } else if (activateOfflineButtonVar.className === "active"){
+		// 	document.getElementById('all-id').style.display = 'none';
+		// 	document.getElementById('online-id').style.display = 'none';
+		// 	document.getElementById('offline-id').style.display = 'block';
+		// }
 		showContent();
-		document.getElementById('offline-id').style.display = 'none';
-		document.getElementById('all-id').style.display = 'none';
-		document.getElementById('online-id').style.display = 'none';
 		var nextInput = document.getElementById('search-field').value.toLowerCase();
 		for (var l = 0; l < users.length ;l++){
 			if (!(users[l].toLowerCase().match(nextInput)) ){
 				document.getElementById(users[l]).style.display = 'none';
 			}  
 		}
-		document.getElementById('search-id').style.display = 'block';
+		document.getElementById('all-id').style.display = 'block';
 	}
 }
 
