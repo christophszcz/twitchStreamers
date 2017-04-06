@@ -10,7 +10,7 @@ var pictures = {
 	'noobs2ninjas' : 'https://static-cdn.jtvnw.net/jtv_user_pictures/noobs2ninjas-profile_image-34707f847a73d934-300x300.png'
 };
 
-var searchCounter = 0;
+var activeArray = [];
 
 //Activate Button 
 var activateAllButtonVar = document.getElementById('all-button');
@@ -60,10 +60,11 @@ function loadAllXMLDoc(){
 	}
 	if (activateAllButtonVar.className === "active"){ // All channels
 		activateAllButtonVar.className = "active";
-		document.getElementById('images-id').style.display = 'block';
+		activeArray = [];
 		for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
+	    activeArray.push(users[i]);
 	      (function(xmlhttp){
 	        xmlhttp.onreadystatechange = function() {
 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -114,11 +115,10 @@ function loadAllXMLDoc(){
 	    xmlhttp.send(); 
 	  }
 	} else if (activateOnlineButtonVar.className === "active"){ // Online channels
-		document.getElementById('images-id').style.display = 'block';  
+		activeArray = []; 
 	  for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
-	    
 	      (function(xmlhttp){
 	        xmlhttp.onreadystatechange = function() {
 		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -126,6 +126,7 @@ function loadAllXMLDoc(){
 		          	var data = xmlhttp.responseText;
 								var jsonResponse  = JSON.parse(data);
 		          	if(jsonResponse['stream']!= null){
+		          		activeArray.push(jsonResponse['stream']['channel']['display_name']);
 			            document.getElementById('images-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
 			            																											"<div class='thumbnail online-box'>" +
 			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
@@ -148,7 +149,7 @@ function loadAllXMLDoc(){
 	    xmlhttp.send(); 
 	  }
 	} else if (activateOfflineButtonVar.className === "active"){ // Offline channels
-		document.getElementById('images-id').style.display = 'block';
+		activeArray = [];
 		for (var i = 0; i < users.length ; i++) { 
 	    var xmlhttp = new XMLHttpRequest();
 	    var url = "https://wind-bow.glitch.me/twitch-api/streams/" + users[i];
@@ -160,6 +161,7 @@ function loadAllXMLDoc(){
 								var jsonResponse  = JSON.parse(data);
 								var title = jsonResponse['_links']['channel'].replace('https://api.twitch.tv/kraken/channels/', '');
 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures") )  ){
+									activeArray.push(title);
 									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
 		            																											"<div class='thumbnail'>" +
 		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
@@ -170,6 +172,7 @@ function loadAllXMLDoc(){
 																										        					"</div>" +
 																									        					"</div>" );
 								} else if (jsonResponse['stream'] === null){
+									activeArray.push(title);
 									document.getElementById('images-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
 																																				"<div class='thumbnail offline-box'>" +
 																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
@@ -196,59 +199,21 @@ function loadAllXMLDoc(){
 };
 
 //Search 
-// function search (){
-// 	if (searchCounter === 0){
-// 		if (activateAllButtonVar.className === "active"){
-// 			document.getElementById('offline-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'none';
-// 			document.getElementById('all-id').style.display = 'block';
-// 		} else if (activateOnlineButtonVar.className === "active"){
-// 			document.getElementById('offline-id').style.display = 'none';
-// 			document.getElementById('all-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'block';
-// 		} else if (activateOfflineButtonVar.className === "active"){
-// 			document.getElementById('all-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'none';
-// 			document.getElementById('offline-id').style.display = 'block';
-// 		}
-// 		searchCounter ++;
-// 		var input = document.getElementById('search-field').value.toLowerCase();
-// 		for (var k = 0; k < users.length ;k++){
-// 			if (!(users[k].toLowerCase().match(input)) ){
-// 				document.getElementById(users[k]).style.display = 'none';
-// 			}  
-// 		}
-// 	} else {
-// 		if (activateAllButtonVar.className === "active"){
-// 			document.getElementById('offline-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'none';
-// 			document.getElementById('all-id').style.display = 'block';
-// 		} else if (activateOnlineButtonVar.className === "active"){
-// 			document.getElementById('offline-id').style.display = 'none';
-// 			document.getElementById('all-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'block';
-// 		} else if (activateOfflineButtonVar.className === "active"){
-// 			document.getElementById('all-id').style.display = 'none';
-// 			document.getElementById('online-id').style.display = 'none';
-// 			document.getElementById('offline-id').style.display = 'block';
-// 		}
-// 		showContent();
-// 		var nextInput = document.getElementById('search-field').value.toLowerCase();
-// 		for (var l = 0; l < users.length ;l++){
-// 			if (!(users[l].toLowerCase().match(nextInput)) ){
-// 				document.getElementById(users[l]).style.display = 'none';
-// 			}  
-// 		}
-// 	}
-// }
+function search (){
+	showContent();
+	var input = document.getElementById('search-field').value.toLowerCase();
+	for (var k = 0; k < activeArray.length ;k++){
+		if (!(activeArray[k].toLowerCase().match(input)) ){
+			document.getElementById(activeArray[k]).style.display = 'none';
+		}  
+	}
+}
 
-// function showContent(){
-// 	for (var m = 0; m < users.length; m++){
-// 		if (document.getElementById(users[m]).style.display ==='none'){
-// 			document.getElementById(users[m]).style.display = 'block';
-// 		}
-// 	}
-// }
+function showContent(){
+	for (var m = 0; m < activeArray.length; m++){
+		document.getElementById(activeArray[m]).style.display = 'block';
+	}
+}
 
-// var searchTextField = document.getElementById('search-button');
-// searchTextField.addEventListener('click', search);
+var searchTextField = document.getElementById('search-button');
+searchTextField.addEventListener('click', search);
