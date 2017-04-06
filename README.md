@@ -1,3 +1,3 @@
 ## Twitch Streamers
 
-[http://codepen.io/cjszcz17/pen/XMWBEV](http://codepen.io/cjszcz17/pen/XMWBEV)
+[https://christophszcz.github.io/twitchStreamers/#](https://christophszcz.github.io/twitchStreamers/#)
