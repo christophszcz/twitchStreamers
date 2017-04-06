@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 																																		  	"<img src='" + pictures[title] + "'/>" + 	
 																																		  	jsonResponse['stream']['channel']['display_name'] +
 																																		  "</a>" +
-																									        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." +"</p>" +
+																									        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
 																									        					"</div>" +
 																								        					"</div>" );
 							}
@@ -101,7 +101,7 @@ function loadOnlineXMLDoc() {
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
-																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." + "</p>" +
+																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." + "</p>" +
 																											        					"</div>" +
 																										        					"</div>" );																							
 		          	} 
@@ -236,7 +236,7 @@ function loadAllXMLDoc() {
 																																			  	"<img src='" + pictures[title] + "'/>" + 	
 																																			  	jsonResponse['stream']['channel']['display_name'] +
 																																			  "</a>" +
-																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,22) + " ..." +"</p>" +
+																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,20) + " ..." +"</p>" +
 																										        					"</div>" +
 																									        					"</div>" );
 								}
@@ -311,7 +311,6 @@ function search (){
 		document.getElementById('all-id').style.display = 'none';
 		document.getElementById('online-id').style.display = 'none';
 		var nextInput = document.getElementById('search-field').value.toLowerCase();
-		console.log(nextInput);
 		for (var l = 0; l < users.length ;l++){
 			if (!(users[l].toLowerCase().match(nextInput)) ){
 				document.getElementById(users[l]).style.display = 'none';
@@ -331,8 +330,3 @@ function showContent(){
 
 var searchTextField = document.getElementById('search-button');
 searchTextField.addEventListener('click', search);
-
-// var newGroup = [];
-// searchCounter ++;
-// console.log(input);
-// console.log(nextInput);
