@@ -215,5 +215,5 @@ function showContent(){
 	}
 }
 
-var searchTextField = document.getElementById('search-button');
-searchTextField.addEventListener('click', search);
+// var searchTextField = document.getElementById('search-button');
+// searchTextField.addEventListener('click', search);
