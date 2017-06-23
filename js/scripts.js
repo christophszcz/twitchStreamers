@@ -114,6 +114,7 @@ function loadAllXMLDoc(){
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
+	  purpleBackground();
 	} else if (activateOnlineButtonVar.className === "active"){ // Online channels
 		activeArray = []; 
 	  for (var i = 0; i < users.length ; i++) { 
@@ -148,6 +149,7 @@ function loadAllXMLDoc(){
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
+	  purpleBackground();
 	} else if (activateOfflineButtonVar.className === "active"){ // Offline channels
 		activeArray = [];
 		for (var i = 0; i < users.length ; i++) { 
@@ -195,6 +197,7 @@ function loadAllXMLDoc(){
 	    xmlhttp.send(); 
 	  }
 	  var myOfflineElement = document.getElementById('images-id');
+	  purpleBackground();
 	}
 };
 
@@ -215,5 +218,12 @@ function showContent(){
 	}
 }
 
-// var searchTextField = document.getElementById('search-button');
-// searchTextField.addEventListener('click', search);
+//Extend Purple Background
+
+function purpleBackground(){
+	if(activeArray.length <= 2 && activateOfflineButtonVar.className !== 'active'){
+		document.getElementsByClassName('container')[0].style.height = '100vh';
+	} else if (activeArray.length >= 3 || activateOfflineButtonVar.className === 'active') {
+		document.getElementsByClassName('container')[0].style.height = '100%';
+	}
+}
