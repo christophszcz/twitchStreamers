@@ -26,6 +26,7 @@ body {
 	font-size: 32px;
 	text-align: center;
 	color: #fff;
+	text-shadow: -1px -5px #74308A, -3px 3px #74308A;
 }
 
 /* Channel Layout */
@@ -79,6 +80,10 @@ body {
 
 a{
 	color: #2C2541;
+}
+
+.channel-name{
+	font-family: 'Saira Semi Condensed', sans-serif;
 }
 
 /* Dev Info */

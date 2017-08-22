@@ -77,7 +77,7 @@ function loadAllXMLDoc(){
 								if (jsonResponse['stream'] === null && !(pictures[title].match("https://static-cdn.jtvnw.net/jtv_user_pictures"))  ){
 									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
 		            																											"<div class='thumbnail'>" +
-		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+		            																												"<a href='https://www.twitch.tv/" +  title + "' class='channel-name' target='_blank'>" +
 		            																													"<img src='" +  pictures[title]  +"'/>" +
 																																			  	title +
 																																			  "</a>" +
@@ -87,7 +87,7 @@ function loadAllXMLDoc(){
 								} else if (jsonResponse['stream'] === null){
 									document.getElementById('images-id').innerHTML +=  ("<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
 																																		"<div class='thumbnail offline-box'>" +
-																																	    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																	    "<a href='https://www.twitch.tv/" +  title + "' class='channel-name' target='_blank'>" +
 																																	      "<img src='" +  pictures[title]  +"'/>" +
 																																	      title + 
 																																	    "</a>" +
@@ -97,7 +97,7 @@ function loadAllXMLDoc(){
 								} else if (jsonResponse['stream'] != null){
 									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" +
 		            																											"<div class='thumbnail online-box'>" +
-		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
+		            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' class='channel-name' target='_blank'>" +
 																																			  	"<img src='" + pictures[title] + "'/>" + 	
 																																			  	jsonResponse['stream']['channel']['display_name'] +
 																																			  "</a>" +
@@ -132,7 +132,7 @@ function loadAllXMLDoc(){
 		          		activeArray.push(jsonResponse['stream']['channel']['display_name']);
 			            document.getElementById('images-id').innerHTML += ( "<div class='col-xs-6 col-md-3' id='" + jsonResponse['stream']['channel']['display_name'] + "'>" +
 			            																											"<div class='thumbnail online-box'>" +
-			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' target='_blank'>" +
+			            																												"<a href='" + jsonResponse['stream']['channel']['url'] + "' class='channel-name' target='_blank'>" +
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
@@ -168,7 +168,7 @@ function loadAllXMLDoc(){
 									activeArray.push(title);
 									document.getElementById('images-id').innerHTML +=  ( "<div class='col-xs-6 col-md-3' id='" + title + "'>" + 
 		            																											"<div class='thumbnail'>" +
-		            																												"<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+		            																												"<a href='https://www.twitch.tv/" +  title + "' class='channel-name' target='_blank'>" +
 		            																													"<img src='" +  pictures[title]  +"'/>" +
 																																			  	title +
 																																			  "</a>" +
@@ -179,7 +179,7 @@ function loadAllXMLDoc(){
 									activeArray.push(title);
 									document.getElementById('images-id').innerHTML += ("<div class='col-xs-6 col-md-3' id='" + title + "'>" +  
 																																				"<div class='thumbnail offline-box'>" +
-																																			    "<a href='https://www.twitch.tv/" +  title + "' target='_blank'>" +
+																																			    "<a href='https://www.twitch.tv/" +  title + "' class='channel-name' target='_blank'>" +
 																																			      "<img src='" +  pictures[title]  +"'/>" +
 																																			      title + 
 																																			    "</a>" +
