@@ -21,7 +21,9 @@ function showContent(){
 function purpleBackground(){
 	if(activeArray.length <= 2 && activateOfflineButtonVar.className !== 'active'){
 		document.getElementsByClassName('container')[0].style.height = '100vh';
+		document.getElementsByClassName('dev-info')[0].style.top = '50px';
 	} else if (activeArray.length >= 3 || activateOfflineButtonVar.className === 'active') {
 		document.getElementsByClassName('container')[0].style.height = '100%';
+		document.getElementsByClassName('dev-info')[0].style.top = '0px';
 	}
 }
