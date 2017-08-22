@@ -29,6 +29,17 @@ body {
 	text-shadow: -1px -5px #74308A, -3px 3px #74308A;
 }
 
+/* Title Media Queries */
+
+@media(max-width: 435px){
+	.main-title{
+		font-size: 24px;
+	}
+	#logo{
+		height: 37px;
+	}
+} 
+
 /* Channel Layout */
 
 .images {
