@@ -1,3 +1,10 @@
+/* Font */
+
+@font-face {
+	font-family: 'twitch';
+	src: url('../fonts/twitchy.tv.otf');
+}
+
 /*Background Design */
 
 body {
@@ -15,6 +22,8 @@ body {
 /* Title */
 
 .main-title{
+	font-family: 'twitch';
+	font-size: 32px;
 	text-align: center;
 	color: #fff;
 }
