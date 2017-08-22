@@ -26,7 +26,10 @@ body {
 	font-size: 32px;
 	text-align: center;
 	color: #fff;
-	text-shadow: -1px -5px #74308A, -3px 3px #74308A;
+	text-shadow: -5px 5px 0px #74308A, 
+		-5px 8px 0px #74308B, 
+		0px -5px 0px #74308B, 
+		4px 7px 0px #74308B;
 }
 
 /* Title Media Queries */
