@@ -71,3 +71,18 @@ body {
 a{
 	color: #2C2541;
 }
+
+/* Dev Info */
+
+.dev-info{
+	font-family: 'Saira Semi Condensed', sans-serif;
+  font-size: 14px;
+  text-align: right;
+  color: #fff;
+} 
+
+#website-link{
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+}
