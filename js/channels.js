@@ -116,7 +116,6 @@ function loadAllXMLDoc(){
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
-	  purpleBackground();
 	} else if (activateOnlineButtonVar.className === "active"){ // Online channels
 		activeArray = []; 
 	  for (var i = 0; i < users.length ; i++) { 
@@ -138,7 +137,7 @@ function loadAllXMLDoc(){
 																																				  "</a>" +
 																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,18) + " ..." + "</p>" +
 																											        					"</div>" +
-																										        					"</div>" );																							
+																										        					"</div>" );																						
 		          	} 
 		          }else if (xmlhttp.status == 400) {
 		            console.log('There was an error 400');
@@ -151,7 +150,6 @@ function loadAllXMLDoc(){
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send(); 
 	  }
-	  purpleBackground();
 	} else if (activateOfflineButtonVar.className === "active"){ // Offline channels
 		activeArray = [];
 		for (var i = 0; i < users.length ; i++) { 
@@ -199,6 +197,5 @@ function loadAllXMLDoc(){
 	    xmlhttp.send(); 
 	  }
 	  var myOfflineElement = document.getElementById('images-id');
-	  purpleBackground();
 	}
 };
