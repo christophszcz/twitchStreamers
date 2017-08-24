@@ -23,7 +23,7 @@ html, body {
 		height: 1800px;
 	}
 }
-
+    padding-bottom: 9px;
 @media(max-width: 500px){
 	.container{
 		height: 1500px;
@@ -81,6 +81,7 @@ html, body {
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 	background-color: #6441A4;
 	color: #fff;
+	padding-bottom: 9px;
 }
 
 .nav-tabs {
