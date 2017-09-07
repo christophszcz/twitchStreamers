@@ -44,6 +44,12 @@ html, body {
 
 /* Title Media Queries */
 
+@media (max-width: 992px){
+	.main-title{
+		margin-bottom: 40px;
+	}
+}
+
 @media(max-width: 500px){
 	.main-title{
 		text-shadow: -5px 5px 0px #74308A, 
