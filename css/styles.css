@@ -23,7 +23,6 @@ html, body {
 		height: 1800px;
 	}
 }
-    padding-bottom: 9px;
 @media(max-width: 500px){
 	.container{
 		height: 1500px;
@@ -44,6 +43,16 @@ html, body {
 }
 
 /* Title Media Queries */
+
+@media(max-width: 500px){
+	.main-title{
+		text-shadow: -5px 5px 0px #74308A, 
+			-5px 8px 0px #74308B, 
+			0px -3px 0px #74308B, 
+			1px 6px 0px #74308B, 
+			1px 7px 0px #74308B;
+	}
+}
 
 @media(max-width: 435px){
 	.main-title{
