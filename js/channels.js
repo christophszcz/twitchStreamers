@@ -101,7 +101,7 @@ function loadAllXMLDoc(){
 																																			  	"<img src='" + pictures[title] + "'/>" + 	
 																																			  	jsonResponse['stream']['channel']['display_name'] +
 																																			  "</a>" +
-																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,18) + " ..." +"</p>" +
+																										        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,16) + " ..." +"</p>" +
 																										        					"</div>" +
 																									        					"</div>" );
 								}
@@ -135,7 +135,7 @@ function loadAllXMLDoc(){
 																																				  	"<img src='" + jsonResponse['stream']['channel']['logo']  +"'/>" + 	
 																																				  	jsonResponse['stream']['channel']['display_name'] +
 																																				  "</a>" +
-																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,18) + " ..." + "</p>" +
+																											        						"<p class='status'>" + jsonResponse['stream']['channel']['status'].substring(0,16) + " ..." + "</p>" +
 																											        					"</div>" +
 																										        					"</div>" );																						
 		          	} 
