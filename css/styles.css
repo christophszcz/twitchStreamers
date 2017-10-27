@@ -36,10 +36,10 @@ html, body {
 	font-size: 32px;
 	text-align: center;
 	color: #fff;
-	text-shadow: -5px 5px 0px #74308A, 
-		-5px 8px 0px #74308B, 
-		0px -5px 0px #74308B, 
-		4px 7px 0px #74308B;
+	text-shadow: -5px 5px 0px #743087, 
+		-5px 8px 0px #743087, 
+		0px -5px 0px #743087, 
+		4px 7px 0px #743087;
 }
 
 /* Title Media Queries */
@@ -52,11 +52,11 @@ html, body {
 
 @media(max-width: 500px){
 	.main-title{
-		text-shadow: -5px 5px 0px #74308A, 
-			-5px 8px 0px #74308B, 
-			0px -3px 0px #74308B, 
-			1px 6px 0px #74308B, 
-			1px 7px 0px #74308B;
+		text-shadow: -5px 5px 0px #743087, 
+			-5px 8px 0px #743087, 
+			0px -3px 0px #743087, 
+			1px 6px 0px #743087, 
+			1px 7px 0px #743087;
 	}
 }
 
